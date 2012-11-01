@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minHeight="30dip"
+    android:minWidth="30dip"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linearBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/myTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quảng cáo"
+        android:textColor="#aaffff"
+        android:textSize="16sp"
+        android:ellipsize="marquee"
+        android:singleLine="true"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:background="#838B83"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/previous"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:clickable="true"
+            android:src="@drawable/previous" 
+            android:layout_alignParentLeft="true">
+        </ImageView>
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="220dip"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal" android:layout_gravity="center_vertical|center_horizontal">
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal" >
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="1/3"
+                    android:textColor="#B22222"
+                    android:textSize="20dip" >
+                </TextView>
+            </TableRow>
+        </TableLayout>
+
+        <ImageView
+            android:id="@+id/next"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:clickable="true"
+            android:src="@drawable/next" 
+            android:layout_alignParentRight="true">
+        </ImageView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent" >
+
+        <ListView
+            android:id="@+id/listItems"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:choiceMode="singleChoice"
+            android:clickable="true"
+            android:scrollbars="vertical"
+            android:smoothScrollbar="true" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>
