@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="true"
+        android:orientation="horizontal" >
+
+        <TableLayout
+            android:id="@+id/tableLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TableLayout
+                    android:id="@+id/tableLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TableRow
+                        android:id="@+id/tableRow2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/txtTitle"
+                            android:layout_width="220dip"
+                            android:layout_height="50dip"
+                            android:maxWidth="200dip"
+                            android:text="fsfsd"
+                            android:textSize="16dip" >
+                        </TextView>
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/tableRow3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/txtDateTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="200dip"
+                            android:text="42423442423"
+                            android:textColor="#FF0000"
+                            android:textSize="14dip" >
+                        </TextView>
+                    </TableRow>
+                </TableLayout>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:id="@+id/tableLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:gravity="center_vertical|center_horizontal">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="0dip"
+                android:layout_alignParentRight="true">
+            </ImageView>
+        </TableLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#803D3D3D" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/p1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.09"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="Nạp tiền"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.10"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/txtContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Bạn có muốn nạp tiền không ?"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:padding="5dp" >
+
+            <Button
+                android:id="@+id/bt_DongY"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/yes_no_button"
+                android:text="Đồng ý"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/bt_Huy"
+                android:layout_width="95dp"
+                android:layout_height="fill_parent"
+                android:background="@drawable/yes_no_button"
+                android:text="Hủy"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#803D3D3D" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/nap_dina"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:text="Đổi mật khẩu"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.10"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Nhập mật khẩu cũ"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="bold" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/matkhau_cu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/textfield_naptien"
+                android:hint="Mật khẩu cũ"
+                android:paddingLeft="5dp"
+                android:password="true" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Nhập mật khẩu mới"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="bold" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/matkhau_moi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/textfield_naptien"
+                android:hint="Mật khẩu mới ..."
+                android:paddingLeft="5dp"
+                android:password="true" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Nhập lại mật khẩu mới"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="bold" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/nhapmatkhau_moi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/textfield_naptien"
+                android:hint="Nhập lại mật khẩu ..."
+                android:paddingLeft="5dp"
+                android:password="true" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp" >
+
+            <Button
+                android:id="@+id/bt_DongY"
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/yes_no_button"
+                android:text="Đồng ý"
+                android:textColor="#ffffff" />
+
+            <Button
+                android:id="@+id/bt_Huy"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/yes_no_button"
+                android:text="Hủy"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
