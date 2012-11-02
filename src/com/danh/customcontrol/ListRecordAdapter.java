@@ -7,30 +7,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class ListRecordAdapter extends ArrayAdapter<String> {
+import com.hdc.mycasino.R;
+import com.hdc.mycasino.model.RoomInfo;
+
+public class ListRecordAdapter extends ArrayAdapter<RoomInfo> {
 
 	private Context context;
 	private int resourse;
-	private ArrayList<String> arraylist;
+	private ArrayList<RoomInfo> arraylist = new ArrayList<RoomInfo>();
 	private String link;
 
 	public ListRecordAdapter(Context context, int textViewResourceId,
-			ArrayList<String> objects, String _link) {
+			ArrayList<RoomInfo> objects) {
 		super(context, textViewResourceId, objects);
 		// TODO Auto-generated constructor stub
 		this.context = context;
 		this.resourse = textViewResourceId;
 		this.arraylist = objects;
-		this.link = _link;
 	}
 
-	public void setList(ArrayList<String> objects){
+	public void setList(ArrayList<RoomInfo> objects){
 		this.arraylist = objects;
 	}
 	
 	// get ItemDTO
-	public String getItems(int position) {
+	public RoomInfo getItems(int position) {
 		return arraylist.get(position);
 	}
 
@@ -44,40 +48,22 @@ public class ListRecordAdapter extends ArrayAdapter<String> {
 			LayoutInflater layout = (LayoutInflater) getContext()
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			v = layout.inflate(resourse, null);
-//			v = layout.inflate(R.layout.items_new, null);
+
 		}
 
-//		final Item item = arraylist.get(position);
-//		if (item != null) {
-//			TextView title = (TextView) v.findViewById(R.id.txtTitle);
-//			TextView date = (TextView) v.findViewById(R.id.txtDateTime);
-//			TextView duration = (TextView) v.findViewById(R.id.txtDuration);
-//			ImageView image = (ImageView) v.findViewById(R.id.imageView1);
-//
-//			if (title != null) {
-//				title.setText(item.getTitle());
-//			}
-//			if (date != null) {
-//				date.setText("Views : " + item.getDownload());
-//			}
-//			if(!item.getDuration().equals("null")){
-//				duration.setText("Times: " + item.getDuration());
-//			}else{
-//				duration.setText(/*"Times: " + "01:00"*/"");
-//			}
-//			if (image != null && item.getImg()!=null) {
-//				try {					
-//					image.setImageBitmap(item.getImg());
-//				} catch (Exception e) {
-//				}
-//			}else{
-//				image.setImageDrawable(context.getResources().getDrawable(R.drawable.bg));
-////				image.setImageBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.bg));
-//			}
-//			
-//
-//		}
+		TextView t = (TextView)v.findViewById(R.id.room);
+		t.setText("Phòng " + arraylist.get(position).itemName);
 
+		ImageView img = (ImageView)v.findViewById(R.id.imgRoomStatus);
+		int status = arraylist.get(position).status; 
+		if(status == 0){
+			img.setImageResource(R.drawable.icon_room_status_0);
+		}else if(status == 1){
+			img.setImageResource(R.drawable.icon_room_status_1);
+		}else{
+			img.setImageResource(R.drawable.icon_room_status_2);
+		}
+		
 		return v;
 	}
 }

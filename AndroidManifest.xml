@@ -28,7 +28,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".SelectRoom"
+            android:name=".SelectTable"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >
@@ -46,6 +46,12 @@
         </activity>
         <activity
             android:name=".SelectGame"
+            android:configChanges="orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name=".SelectRoom"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="landscape" >

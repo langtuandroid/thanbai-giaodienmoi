@@ -1,5 +1,7 @@
 package com.hdc.mycasino;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,13 +24,27 @@ import com.danh.standard.Image;
 import com.hdc.mycasino.customcontrol.CustomDialog;
 import com.hdc.mycasino.model.DataManager;
 import com.hdc.mycasino.model.IAction;
+import com.hdc.mycasino.model.RoomInfo;
 import com.hdc.mycasino.network.Session;
+import com.hdc.mycasino.screen.ListBoardScr;
+import com.hdc.mycasino.screen.ListStringScr;
 import com.hdc.mycasino.service.GlobalService;
 import com.hdc.mycasino.utilities.GameResource;
 
 public class SelectGame extends Activity implements OnItemClickListener,
 		OnClickListener {
 
+	public final static byte PHOM = 0;
+	public final static byte TLMN = 1;
+	public final static byte XITO = 2;
+	public final static byte TLMB = 3;
+	public final static byte BAI_CAO = 4;
+	public final static byte XI_DACH = 5;
+	public final static byte BACK_JACK = 6;
+	public final static byte POKER = 7;
+	
+	public ArrayList<RoomInfo> m_LstRoomInfo = new ArrayList<RoomInfo>();	
+	
 	public static SelectGame instance;
 
 	// TODO galary to select game
@@ -175,7 +191,23 @@ public class SelectGame extends Activity implements OnItemClickListener,
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
 		// TODO Auto-generated method stub
-		Toast.makeText(this, "" + position, Toast.LENGTH_LONG).show();
+//		Toast.makeText(this, "" + position, Toast.LENGTH_LONG).show();
+		
+		switch (position) {
+		case 0:
+			//tiến lên miền nam
+//			ListBoardScr.getInstance().m_strTitleGame = getGameNameById(TLMN);
+//			ListStringScr.gI().m_iSelectedTypeGame = TLMN;
+//			GameCanvas.startWaitDlg();
+			CustomDialog.instance.showDialog_Waitting(GameResource.plzWait);
+			GlobalService.sendMessageIsRegisteredCompetition(TLMN);
+			GlobalService.onSendGameID((byte) TLMN);
+
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	// TODO BACK game

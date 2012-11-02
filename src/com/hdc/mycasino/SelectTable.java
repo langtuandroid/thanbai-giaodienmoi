@@ -19,7 +19,7 @@ import com.danh.customcontrol.ListRecordAdapter;
 import com.hdc.mycasino.customcontrol.CustomDialog;
 import com.hdc.mycasino.model.RoomInfo;
 
-public class SelectRoom extends Activity{
+public class SelectTable extends Activity{
 
 	private TabHost mTabHost;
 
@@ -36,7 +36,7 @@ public class SelectRoom extends Activity{
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		// construct the tabhost
-		setContentView(R.layout.select_room);
+		setContentView(R.layout.select_table);
 
 		//set context for dialog
 		CustomDialog.instance.gI().setContext(this);
@@ -58,16 +58,16 @@ public class SelectRoom extends Activity{
 //		}
 		
 		ListView listView = (ListView)v.findViewById(R.id.listView);
-		listView.setAdapter(new ListRecordAdapter(SelectRoom.this, R.layout.item_listview, SelectGame.instance.m_LstRoomInfo));
+//		listView.setAdapter(new ListRecordAdapter(SelectTable.this, R.layout.item_listview, SelectGame.instance.m_LstRoomInfo));
 		
-		TextView t2 = new TextView(this);
-		t2.setText("dadsa fdfsd sd");
-		TextView t3 = new TextView(this);
-		t3.setText("dadsa f fghhgh");
+//		TextView t2 = new TextView(this);
+//		t2.setText("dadsa fdfsd sd");
+//		TextView t3 = new TextView(this);
+//		t3.setText("dadsa f fghhgh");
 
-		setupTab(listView, "Cá nhân");
-		setupTab(t2, "Gia tộc");
-		setupTab(t3, "Thần bài");
+		setupTab(listView, "TIẾN LÊN MIỀN NAM");
+//		setupTab(t2, "Gia tộc");
+//		setupTab(t3, "Thần bài");
 	}
 
 	private void setupTab(final View view, final String tag) {

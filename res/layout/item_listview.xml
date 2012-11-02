@@ -6,9 +6,9 @@
     android:layout_marginTop="5dp"
     android:background="@drawable/iterm_selector"
     android:orientation="horizontal" >
-
+
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -20,12 +20,12 @@
         android:text="TextView" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/imgRoomStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/icon_phong" />
+        android:src="@drawable/icon_room_status_0" />
 
 </LinearLayout>
