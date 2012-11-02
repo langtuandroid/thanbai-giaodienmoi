@@ -2,15 +2,8 @@ package com.hdc.mycasino;
 
 import java.util.ArrayList;
 
-import com.hdc.mycasino.customcontrol.CustomDialog;
-import com.hdc.mycasino.messageHandler.GlobalMsgHandler;
-import com.hdc.mycasino.model.IAction;
-import com.hdc.mycasino.network.Session;
-import com.hdc.mycasino.service.GlobalService;
-import com.hdc.mycasino.utilities.FileManager;
-import com.hdc.mycasino.utilities.GameResource;
-
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,11 +17,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hdc.mycasino.customcontrol.CustomDialog;
+import com.hdc.mycasino.messageHandler.GlobalMsgHandler;
+import com.hdc.mycasino.model.IAction;
+import com.hdc.mycasino.network.Session;
+import com.hdc.mycasino.service.GlobalService;
+import com.hdc.mycasino.utilities.FileManager;
+import com.hdc.mycasino.utilities.GameResource;
+import com.hdc.mycasino.utilities.TField;
+
 public class Login extends Activity implements OnClickListener {
 	// TODO LOCAL VARIABLES
+	public static Login instance;
 	// TODO server that
-	public static String IP = "210.211.97.6";
-	public static int PORT = 5001;
+	// public static String IP = "210.211.97.6";
+	// public static int PORT = 5001;
+	
+	 public static String IP = "210.211.97.9";
+	 public static int PORT = 3210;
+	
+	
 	public static String m_strLinkUpdateVersion = "http://thegioigame.mobi";
 	public static String version = "1.0.3";
 	public static String REFCODE = "";
@@ -54,6 +62,8 @@ public class Login extends Activity implements OnClickListener {
 	// TODO Button
 	Button bt_DangNhap;
 	Button bt_DangKy;
+	Button bt_ReDangKy;
+	Button bt_QuenMK;
 
 	// TODO Check box
 	CheckBox check_NhoMK;
@@ -61,7 +71,12 @@ public class Login extends Activity implements OnClickListener {
 	// TODO Edit Text
 	EditText edit_UserName;
 	EditText edit_Pass;
+	EditText edit_RePass;
 
+	//TODO flag state : 
+	//Đăng nhập : 0,đăng ký : 1,quên mật khẩu : 2,đăng nhập thành công : 3
+	public int flagState = 0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -70,9 +85,14 @@ public class Login extends Activity implements OnClickListener {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.login);
+		
+		instance = this;
 
 		// TODO init all control
 		initAllControls();
+		
+		//TODO load user and pass
+		loadUser_Pass();
 
 		// init dialog
 		CustomDialog.instance.gI().setContext(this);
@@ -114,12 +134,45 @@ public class Login extends Activity implements OnClickListener {
 		bt_DangNhap.setOnClickListener(this);
 		bt_DangKy = (Button) findViewById(R.id.bt_DangKy);
 		bt_DangKy.setOnClickListener(this);
+		bt_ReDangKy = (Button) findViewById(R.id.bt_ReDangKy);
+		bt_ReDangKy.setOnClickListener(this);
+		bt_QuenMK = (Button) findViewById(R.id.bt_QuenMatKhau);
+		bt_QuenMK.setOnClickListener(this);
 
 		// TODO Edit Text
 		edit_UserName = (EditText) findViewById(R.id.txtUserName);
 		edit_Pass = (EditText) findViewById(R.id.txtPass);
+		edit_RePass = (EditText)findViewById(R.id.txtRePass);
+		
+		//TODO Check box 'Nhớ mật khẩu'
+		check_NhoMK = (CheckBox)findViewById(R.id.nho_mat_khau);
 
 	}
+	
+	// TODO save pass
+	public void savePass() {
+		if (check_NhoMK.isChecked()) {
+			FileManager.saveUserAndPass(0,edit_UserName.getText().toString(),
+					edit_Pass.getText().toString(), "user.txt");
+		} else {
+			FileManager.saveUserAndPass(1, "", "", "user.txt");
+		}
+	}
+	
+	// TODO loadUser & Pass
+	private void loadUser_Pass() {
+		// save status
+		String[] mString = FileManager.loadUserAndPass("user.txt");
+		int a = Integer.parseInt(mString[0]);
+		if (a == 0) {
+			check_NhoMK.setChecked(true);
+		} else {
+			check_NhoMK.setChecked(false);
+		}
+		// load username and pass
+		edit_UserName.setText(mString[1]);
+		edit_Pass.setText(mString[2]);
+	}	
 
 	@Override
 	public void onClick(View v) {
@@ -131,6 +184,17 @@ public class Login extends Activity implements OnClickListener {
 			THOAT_GAME();
 		} else if (v == imgView_QuenMK || v == txt_QuenMK) {
 			// quên mật khẩu
+			flagState = 2;
+			
+			edit_Pass.setVisibility(View.GONE);
+			edit_RePass.setVisibility(View.GONE);
+			check_NhoMK.setVisibility(View.GONE);
+			
+			bt_QuenMK.setVisibility(View.VISIBLE);
+			bt_DangNhap.setVisibility(View.GONE);
+			bt_DangKy.setVisibility(View.GONE);
+			bt_ReDangKy.setVisibility(View.GONE);
+			
 		} else if (v == imgView_GioiThieu || v == txt_GioiThieu) {
 			// gioi thieu
 			GIOI_THIEU();
@@ -144,16 +208,76 @@ public class Login extends Activity implements OnClickListener {
 			// xóa dữ liệu
 		} else if (v == bt_DangNhap) {
 			doLogin();
+		}else if(v == bt_DangKy){
+			check_NhoMK.setVisibility(CheckBox.GONE);
+			edit_RePass.setVisibility(View.VISIBLE);
+			bt_DangNhap.setVisibility(View.GONE);
+			bt_DangKy.setVisibility(View.GONE);
+			bt_ReDangKy.setVisibility(View.VISIBLE);
+			//trạng thái Đăng ký
+			flagState = 1;
+		}else if(v == bt_ReDangKy){
+			doRegister();
+		}else if(v == bt_QuenMK){
+			doResetPass();
+		}
+	}
+	
+	//TODO doResetPass
+	private void doResetPass() {
+		if (edit_UserName.getText().toString().equals("") || edit_UserName.getText().toString().length() == 0) {
+			// GameCanvas.startOKDlg(GameResource.plzInputInfo);
+			CustomDialog.instance.gI().showDialog_Okie("Thông báo", GameResource.plzInputInfo);
+			return;
+		}
+		GameCanvas.startWaitDlg();
+		Key = "123455";
+		doConnect();
+		if (!Key.equals("")) {
+			GlobalService.onSetPass(edit_UserName.getText().toString());
+		}
+	}
+	
+	//TODO doRegister
+	protected void doRegister() {
+		if (edit_UserName.getText().toString().equals("") || edit_Pass.getText().toString().equals("")
+				|| edit_RePass.getText().toString().equals("")) {
+			// GameCanvas.startOKDlg(GameResource.plzInputInfo);
+			CustomDialog.instance.gI().showDialog_Okie("Thông báo", GameResource.plzInputInfo);
+			return;
+		}
+		char[] ch = edit_UserName.getText().toString().toCharArray();
+		int a = ch.length;
+		for (int i = 0; i < a; i++) {
+			if (!TField.setNormal(ch[i])) {
+				// GameCanvas.startOKDlg(GameResource.specialCharNotAllow);
+				CustomDialog.instance.gI().showDialog_Okie("Thông báo",
+						GameResource.specialCharNotAllow);
+				return;
+			}
 		}
 
-	}
+		if (!edit_Pass.getText().toString().equals(edit_RePass.getText().toString())) {
+			// GameCanvas.startOKDlg(GameResource.incorrectPass);
+			CustomDialog.instance.gI().showDialog_Okie("Thông báo", GameResource.incorrectPass);
+			return;
+		}
+		Key = "123455";
+		doConnect();
+		if (!Key.equals("")) {
+			GlobalService.onRegister(edit_UserName.getText().toString(), edit_Pass.getText().toString());
+		}
+	}	
 
 	// TODO thoát
 	private void THOAT_GAME() {
 		CustomDialog.instance.gI().showDialog_yes_no("Thông báo", GameResource.doYouWantExit,
 				new IAction() {
 					public void perform() {
-						finish();
+						instance.finish();
+//						HDCGameMidlet.instance.onDestroy();
+//						ActivityManager manager = (ActivityManager)getSystemService(ACTIVITY_SERVICE);
+//						manager.killBackgroundProcesses("com.hdc.mycasino");
 					}
 				});
 	}
@@ -211,6 +335,7 @@ public class Login extends Activity implements OnClickListener {
 			return;
 		}
 		// GameCanvas.startWaitDlg();
+		CustomDialog.instance.gI().showDialog_Waitting("Xin chờ ...");
 
 		Key = "123455";
 		doConnect();
@@ -218,7 +343,7 @@ public class Login extends Activity implements OnClickListener {
 			GlobalService.onLogin(edit_UserName.getText().toString(), edit_Pass.getText()
 					.toString());
 		}
-		// savePass();
+		savePass();
 	}
 
 	public void getStartScreen() {
@@ -256,5 +381,45 @@ public class Login extends Activity implements OnClickListener {
 
 	public void doConnect() {
 		Session.gI().connect(IP, PORT);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		switch (flagState) {
+		case 0:
+			//đăng nhập : hỏi thoát game
+			THOAT_GAME();
+			break;
+		case 1:
+		case 2:
+			//đăng ký && quên mật khẩu : back trở về đăng nhập
+			flagState = 0;
+			//enable UserName and Password
+			edit_UserName.setVisibility(View.VISIBLE);
+			edit_Pass.setVisibility(View.VISIBLE);
+			edit_RePass.setVisibility(View.GONE);
+			//enable button DangNhap && DangKy
+			bt_DangNhap.setVisibility(View.VISIBLE);
+			bt_DangKy.setVisibility(View.VISIBLE);
+			bt_ReDangKy.setVisibility(View.GONE);
+			bt_QuenMK.setVisibility(View.GONE);
+			//enable check box 'Nho Thong tin'
+			check_NhoMK.setVisibility(View.VISIBLE);			
+			break;
+		case 3:
+			//đăng nhập thành công
+//			super.onBackPressed();			
+			break;
+		default:
+			break;
+		}
+		
+		
+		
+		
+
+		
+		
 	}
 }

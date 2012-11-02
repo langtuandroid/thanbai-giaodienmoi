@@ -369,6 +369,7 @@ public class GameResource {
 	public FrameImage m_frameAvatar_IconAvatar;
 	// NEW
 	public FrameImage m_frameAvatar_IconAvatar_1;
+	public Image imgAvatar;
 
 	// TODO mail
 	public FrameImage m_frameMail_HomThu;
@@ -854,6 +855,8 @@ public class GameResource {
 		m_frameAvatar_IconAvatar = new FrameImage(ImagePack.createImage(ImagePack.AVATAR_ICON_AVATAR_PNG), 64, 64);
 		m_frameAvatar_IconAvatar_1 = new FrameImage(ImagePack.createImage(ImagePack.AVATAR_ICON_AVATAR_1_PNG), 40, 40);
 
+		imgAvatar = ImagePack.createImage(ImagePack.AVATAR_ICON_AVATAR_PNG);
+		
 		// TODO Mail
 		m_frameMail_HomThu = new FrameImage(ImagePack.createImage(ImagePack.MAIL_ICON_HOMTHU), 29, 24);
 

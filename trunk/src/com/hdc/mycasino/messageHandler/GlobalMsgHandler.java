@@ -2,8 +2,13 @@
 
 import java.util.Vector;
 
+import android.content.Intent;
+
 import com.hdc.mycasino.GameCanvas;
 import com.hdc.mycasino.HDCGameMidlet;
+import com.hdc.mycasino.Login;
+import com.hdc.mycasino.SelectGame;
+import com.hdc.mycasino.customcontrol.CustomDialog;
 import com.hdc.mycasino.font.BitmapFont;
 import com.hdc.mycasino.model.BoardInfo;
 import com.hdc.mycasino.model.Clan;
@@ -99,15 +104,11 @@ public class GlobalMsgHandler implements IMessageHandler {
 				Screen.numberUnreadMail = 0;
 			} else {
 				// GameCanvas.startOKDlg(MessageIO.readString(message));
-				HDCGameMidlet.instance.showDialog_Okie("Thông báo", MessageIO.readString(message));
+//				HDCGameMidlet.instance.showDialog_Okie("Thông báo", MessageIO.readString(message));
+				CustomDialog.instance.gI().endDialog();
+				CustomDialog.instance.gI().showDialog_Okie("Thông báo", MessageIO.readString(message));
 			}
-			// demo
-			// if (isSuccess)
-			// CustomDialog.instance.gI().showDialog_Okie("Thông báo",
-			// "Dang nhap thanh cong");
-			// else
-			// CustomDialog.instance.gI().showDialog_Okie("Thông báo",
-			// "Dang nhap that bai");
+
 			// send client type
 			GlobalService.onSendClientType("ANDROID");
 			break;
@@ -117,6 +118,7 @@ public class GlobalMsgHandler implements IMessageHandler {
 			// DataManager.gI().avatarsImageData.loadImage();
 			// switchToMenuGameScr();
 			// } else {
+			
 			GameCanvas.startWaitDlg("Đang cập nhập hình ảnh");
 			GlobalService.sendMessageGetAvatarImage();
 			// }
@@ -367,6 +369,9 @@ public class GlobalMsgHandler implements IMessageHandler {
 				if (dina < 0)
 					dina = 0;
 				HDCGameMidlet.m_myPlayerInfo.dina = dina;
+
+				SelectGame.instance.updateInterface();
+				
 			}
 
 			break;
@@ -2581,8 +2586,17 @@ public class GlobalMsgHandler implements IMessageHandler {
 
 	private void switchToMenuGameScr() {
 		DataManager.gI().loadFrameImage();
-		GameCanvas.endDlg();
+//		GameCanvas.endDlg();
+		
+		CustomDialog.instance.gI().endDialog();
+		
 		MainScr.gI().setSelected(-1);
 		MainScr.gI().switchToMe();
+		
+		Login.instance.flagState = 3;
+		Intent intent = new Intent(Login.instance,SelectGame.class);
+		Login.instance.startActivity(intent);
+		
+//		Login.instance.onBackPressed();
 	}
 }
