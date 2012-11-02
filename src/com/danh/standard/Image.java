@@ -24,10 +24,17 @@ public class Image {
 		return new Image(bitmap);
 	}
 
+	
+	
 	// TODO tạo hình từ hình bitmap có sẵn
 	public static Image createImageFromSrc(Image src, int x, int y, int w, int h) {
 		Bitmap bitmap = Bitmap.createBitmap(src.getBitmap(), x, y, w, h);
 		return new Image(bitmap);
+	}
+	
+	public static Bitmap createBitmapFromSrc(Image src, int x, int y, int w, int h) {
+		Bitmap bitmap = Bitmap.createBitmap(src.getBitmap(), x, y, w, h);
+		return bitmap;
 	}
 
 	public static Image createImage(String resource) throws IOException {

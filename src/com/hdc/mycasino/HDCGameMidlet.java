@@ -70,12 +70,12 @@ public class HDCGameMidlet extends Activity {
 	// public static String IP = "192.168.1.10";
 
 	// TODO server test
-//	public static String IP = "210.211.97.9";
-//	public static int PORT = 3210;
+	// public static String IP = "210.211.97.9";
+	// public static int PORT = 3210;
 
 	// local
-//	 public static String IP = "192.168.1.243";
-//	 public static int PORT = 3210;
+	// public static String IP = "192.168.1.243";
+	// public static int PORT = 3210;
 
 	// TODO server that
 	public static String IP = "210.211.97.6";
@@ -114,17 +114,18 @@ public class HDCGameMidlet extends Activity {
 	Graphics graphics;
 	WakeLock wakeLock;
 	public static float scale = 1;
-	// TODO chế độ rung
+	// TODO cháº¿ Ä‘á»™ rung
 	public Vibrator m_viberator;
 	// TODO gift cho game
 	public static GifView gifView;
+	public boolean flagExit = false;
 
-	public static void setGift(int index,int x,int y) {
+	public static void setGift(int index, int x, int y) {
 		gifView = null;
 		gifView = new GifView(GameResource.instance.inputEmotion[index]);
 		gifView.setX(x);
 		gifView.setY(y);
-//		gifView.play();		
+		// gifView.play();
 	}
 
 	@Override
@@ -195,16 +196,20 @@ public class HDCGameMidlet extends Activity {
 				isConnect = true;
 
 			} else {
-				Toast.makeText(this, "Bạn vui lòng kiểm tra \n kết nối Internet !!!",
+				Toast.makeText(
+						this,
+						"Báº¡n vui lÃ²ng kiá»ƒm tra \n káº¿t ná»‘i Internet !!!",
 						Toast.LENGTH_LONG).show();
 				isConnect = false;
 			}
 
 			PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "GLGame");
+			wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+					"GLGame");
 
 			// Init viberator
-			m_viberator = (Vibrator) instance.getSystemService(Context.VIBRATOR_SERVICE);
+			m_viberator = (Vibrator) instance
+					.getSystemService(Context.VIBRATOR_SERVICE);
 
 			// showDialogReSult();
 			// showDialog_yes_no();
@@ -213,9 +218,9 @@ public class HDCGameMidlet extends Activity {
 			// showDialog_DoiMatKhau();
 			// showDialog_Okie("fdsf","fdfd");
 			// showDialog_Waitting();
-			// showDialog_GuiTinNhan("Tin nhắn từ Danh",
+			// showDialog_GuiTinNhan("Tin nháº¯n tá»« Danh",
 			// "s dfs df sdf sdf sd fsdf ",);
-//			showDialog_Chat_Emoticion("Chat trong game", "fsdfsd");
+			// showDialog_Chat_Emoticion("Chat trong game", "fsdfsd");
 			// showDialog_ChonGioiTinh();
 		} catch (Exception e) {
 			// Log.i("Exception", e.toString());
@@ -251,8 +256,9 @@ public class HDCGameMidlet extends Activity {
 			name_1.setTextColor(Color.parseColor("#ffb901"));
 	}
 
-	// Thông báo bằng Toast của Android
-	public void showDialogReSult(final String[] name, final String[] rank, final String[] money) {
+	// ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
+	public void showDialogReSult(final String[] name, final String[] rank,
+			final String[] money) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -264,9 +270,12 @@ public class HDCGameMidlet extends Activity {
 				// dialog.setContentView(v);
 				// dialog.show();
 
-				int[] m_idName = { R.id.name_1, R.id.name_2, R.id.name_3, R.id.name_4 };
-				int[] m_idRank = { R.id.rank_1, R.id.rank_2, R.id.rank_3, R.id.rank_4 };
-				int[] m_idMoney = { R.id.money_1, R.id.money_2, R.id.money_3, R.id.money_4 };
+				int[] m_idName = { R.id.name_1, R.id.name_2, R.id.name_3,
+						R.id.name_4 };
+				int[] m_idRank = { R.id.rank_1, R.id.rank_2, R.id.rank_3,
+						R.id.rank_4 };
+				int[] m_idMoney = { R.id.money_1, R.id.money_2, R.id.money_3,
+						R.id.money_4 };
 
 				boolean flagColor = false;
 				for (int i = 0; i < name.length; i++) {
@@ -311,7 +320,7 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	// // Thông báo bằng Toast của Android
+	// // ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
 	// public void showDialog_NapTien() {
 	// HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 	// @Override
@@ -359,7 +368,8 @@ public class HDCGameMidlet extends Activity {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_napdina_1, null, false);
+				View v = inflater
+						.inflate(R.layout.popup_napdina_1, null, false);
 
 				if (d != null)
 					d.dismiss();
@@ -369,14 +379,16 @@ public class HDCGameMidlet extends Activity {
 				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 				// TODO title
-				TextView m_Title = (TextView) v.findViewById(R.id.title_naptien);
+				TextView m_Title = (TextView) v
+						.findViewById(R.id.title_naptien);
 				m_Title.setText(title);
 				// TODO Seri
 				final EditText m_Seri = (EditText) v.findViewById(R.id.seri);
-				// TODO Mã số thẻ
-				final EditText m_MaSoThe = (EditText) v.findViewById(R.id.masothe);
+				// TODO MÃ£ sá»‘ tháº»
+				final EditText m_MaSoThe = (EditText) v
+						.findViewById(R.id.masothe);
 
-				// TODO button đồng ý
+				// TODO button Ä‘á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -384,26 +396,29 @@ public class HDCGameMidlet extends Activity {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						if (m_Seri.getText().toString().equals("")) {
-							// GameCanvas.startOKDlg("Bạn phải nhập số seri.");
-							HDCGameMidlet.instance.showDialog_Okie("Thông báo",
-									"Bạn phải nhập số seri.");
+							// GameCanvas.startOKDlg("Báº¡n pháº£i nháº­p sá»‘ seri.");
+							HDCGameMidlet.instance.showDialog_Okie(
+									"ThÃ´ng bÃ¡o",
+									"Báº¡n pháº£i nháº­p sá»‘ seri.");
 							return;
 						}
 						if (m_MaSoThe.getText().toString().equals("")) {
-							// GameCanvas.startOKDlg("Bạn phải nhập mã số thẻ.");
-							HDCGameMidlet.instance.showDialog_Okie("Thông báo",
-									"Bạn phải nhập mã số thẻ.");
+							// GameCanvas.startOKDlg("Báº¡n pháº£i nháº­p mÃ£ sá»‘ tháº».");
+							HDCGameMidlet.instance.showDialog_Okie(
+									"ThÃ´ng bÃ¡o",
+									"Báº¡n pháº£i nháº­p mÃ£ sá»‘ tháº».");
 							return;
 						}
 
-						GlobalService.doRequestChargeMoneySimCard(smsContent.toString(), m_Seri
-								.getText().toString(), m_MaSoThe.getText().toString());
+						GlobalService.doRequestChargeMoneySimCard(smsContent
+								.toString(), m_Seri.getText().toString(),
+								m_MaSoThe.getText().toString());
 
 						d.dismiss();
 					}
 				});
 
-				// TODO button hủy
+				// TODO button há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -423,17 +438,19 @@ public class HDCGameMidlet extends Activity {
 	RadioButton r;
 	public int idx_Gender = 0;
 	public int flag_Gender = 0;
-	public void showDialog_ChonGioiTinh(/*final int idx*/) {
+
+	public void showDialog_ChonGioiTinh(/* final int idx */) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_chon_gioitinh, null, false);
+				View v = inflater.inflate(R.layout.popup_chon_gioitinh, null,
+						false);
 
 				flag_Gender = 0;
-				
+
 				if (d != null)
 					d.dismiss();
 
@@ -441,108 +458,124 @@ public class HDCGameMidlet extends Activity {
 						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
 				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-				// select giới tính
-				final RadioGroup r1 = (RadioGroup) v.findViewById(R.id.radio_group1);
-//				r1.setOnClickListener(new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View v1) {
-//						// TODO Auto-generated method stub
-//						/* RadioButton */
-//						r = (RadioButton) v1;
-//						// Toast.makeText(instance, r.getText() + "fd",
-//						// Toast.LENGTH_LONG).show();
-//					}
-//				});
-				
-				final RadioButton m_r1 = (RadioButton)v.findViewById(R.id.radioButton1);
+				// select giá»›i tÃ­nh
+				final RadioGroup r1 = (RadioGroup) v
+						.findViewById(R.id.radio_group1);
+				// r1.setOnClickListener(new OnClickListener() {
+				//
+				// @Override
+				// public void onClick(View v1) {
+				// // TODO Auto-generated method stub
+				// /* RadioButton */
+				// r = (RadioButton) v1;
+				// // Toast.makeText(instance, r.getText() + "fd",
+				// // Toast.LENGTH_LONG).show();
+				// }
+				// });
+
+				final RadioButton m_r1 = (RadioButton) v
+						.findViewById(R.id.radioButton1);
 				m_r1.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
 						// TODO Auto-generated method stub
-						if(isChecked){
-//							Toast.makeText(instance, "true - r1", Toast.LENGTH_LONG).show();
+						if (isChecked) {
+							// Toast.makeText(instance, "true - r1",
+							// Toast.LENGTH_LONG).show();
 							idx_Gender = 0;
 						}
 					}
 				});
 
-
-				final RadioButton m_r2 = (RadioButton)v.findViewById(R.id.radioButton2);
+				final RadioButton m_r2 = (RadioButton) v
+						.findViewById(R.id.radioButton2);
 				m_r2.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
 						// TODO Auto-generated method stub
-						if(isChecked){
-//							Toast.makeText(instance, "true - r2", Toast.LENGTH_LONG).show();
+						if (isChecked) {
+							// Toast.makeText(instance, "true - r2",
+							// Toast.LENGTH_LONG).show();
 							idx_Gender = 1;
 						}
 					}
 				});
-				
-				final RadioButton m_r3 = (RadioButton)v.findViewById(R.id.radioButton3);
+
+				final RadioButton m_r3 = (RadioButton) v
+						.findViewById(R.id.radioButton3);
 				m_r3.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
 						// TODO Auto-generated method stub
-						if(isChecked){
-//							Toast.makeText(instance, "true - r3", Toast.LENGTH_LONG).show();
+						if (isChecked) {
+							// Toast.makeText(instance, "true - r3",
+							// Toast.LENGTH_LONG).show();
 							idx_Gender = 2;
 						}
 					}
 				});
-				
-				final RadioButton m_r4 = (RadioButton)v.findViewById(R.id.radioButton4);
+
+				final RadioButton m_r4 = (RadioButton) v
+						.findViewById(R.id.radioButton4);
 				m_r4.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
 						// TODO Auto-generated method stub
-						if(isChecked){
-//							Toast.makeText(instance, "true - r4", Toast.LENGTH_LONG).show();
+						if (isChecked) {
+							// Toast.makeText(instance, "true - r4",
+							// Toast.LENGTH_LONG).show();
 							idx_Gender = 3;
 						}
 					}
-				});	
-				
-				final RadioButton m_r5 = (RadioButton)v.findViewById(R.id.radioButton5);
+				});
+
+				final RadioButton m_r5 = (RadioButton) v
+						.findViewById(R.id.radioButton5);
 				m_r5.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-					
+
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
 						// TODO Auto-generated method stub
-						if(isChecked){
-//							Toast.makeText(instance, "true - r5", Toast.LENGTH_LONG).show();
+						if (isChecked) {
+							// Toast.makeText(instance, "true - r5",
+							// Toast.LENGTH_LONG).show();
 							idx_Gender = 4;
 						}
 					}
-				});					
+				});
 
-				// TODO button đồng ý
+				// TODO button Ä‘á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-//						Toast.makeText(instance,idx_Gender + " ", Toast.LENGTH_LONG).show();
-//						idx_Gender = idx;
+						// Toast.makeText(instance,idx_Gender + " ",
+						// Toast.LENGTH_LONG).show();
+						// idx_Gender = idx;
 						flag_Gender = 1;
 						d.dismiss();
 					}
 				});
 
-				// TODO button hủy
+				// TODO button há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-//						idx_Gender = idx;
+						// idx_Gender = idx;
 						flag_Gender = 0;
 						d.dismiss();
 					}
@@ -554,7 +587,7 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	// Thông báo bằng Toast của Android
+	// ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
 	public void showDialog_Okie(final String title, final String content) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
@@ -575,7 +608,8 @@ public class HDCGameMidlet extends Activity {
 				TextView txtTitle = (TextView) v.findViewById(R.id.txtTitle);
 				txtTitle.setText(title.toString());
 				// TODO Content
-				TextView txtContent = (TextView) v.findViewById(R.id.txtContent);
+				TextView txtContent = (TextView) v
+						.findViewById(R.id.txtContent);
 				txtContent.setText(content.toString());
 
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
@@ -595,14 +629,16 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	public void showDialog_GuiTinNhan(final String title, final String content, final MailInfo p) {
+	public void showDialog_GuiTinNhan(final String title, final String content,
+			final MailInfo p) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_traloi_tinnhan, null, false);
+				View v = inflater.inflate(R.layout.popup_traloi_tinnhan, null,
+						false);
 
 				if (d != null)
 					d.dismiss();
@@ -615,7 +651,8 @@ public class HDCGameMidlet extends Activity {
 				TextView txtTitle = (TextView) v.findViewById(R.id.txtTitle);
 				txtTitle.setText(title.toString());
 				// TODO Content
-				TextView txtContent = (TextView) v.findViewById(R.id.txtContent);
+				TextView txtContent = (TextView) v
+						.findViewById(R.id.txtContent);
 				txtContent.setText(content.toString());
 
 				// TODO Chat
@@ -644,11 +681,12 @@ public class HDCGameMidlet extends Activity {
 						if (chat.getText().toString().length() > 0) {
 							GameCanvas.startWaitDlg();
 							GlobalService.onSendMessageToUser(
-									HDCGameMidlet.m_myPlayerInfo.itemName, nick, chat.getText()
-											.toString());
+									HDCGameMidlet.m_myPlayerInfo.itemName,
+									nick, chat.getText().toString());
 						} else {
-							HDCGameMidlet.instance.showDialog_Okie("Thông báo",
-									"Nhập văn bản cần gủi!");
+							HDCGameMidlet.instance.showDialog_Okie(
+									"ThÃ´ng bÃ¡o",
+									"Nháº­p vÄƒn báº£n cáº§n gá»§i!");
 						}
 
 						d.dismiss();
@@ -663,14 +701,17 @@ public class HDCGameMidlet extends Activity {
 	}
 
 	public String content_Chat = "";
-	public void showDialog_Chat_Emoticion(final String title, final String content,final int x,final int y) {
+
+	public void showDialog_Chat_Emoticion(final String title,
+			final String content, final int x, final int y) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_chat_emoticion, null, false);
+				View v = inflater.inflate(R.layout.popup_chat_emoticion, null,
+						false);
 
 				if (d != null)
 					d.dismiss();
@@ -689,19 +730,22 @@ public class HDCGameMidlet extends Activity {
 
 				CustomGalary m_CustomGalary;
 				m_CustomGalary = (CustomGalary) v.findViewById(R.id.galary);
-				m_CustomGalary.setAdapter(new CustomGalleryImageAdapter(instance));
-				m_CustomGalary.setOnItemClickListener(new OnItemClickListener() {
+				m_CustomGalary.setAdapter(new CustomGalleryImageAdapter(
+						instance));
+				m_CustomGalary
+						.setOnItemClickListener(new OnItemClickListener() {
 
-					@Override
-					public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-						// TODO Auto-generated method stub
-						// Toast.makeText(instance, "" + position,
-						// Toast.LENGTH_LONG).show();
-						content_Chat = GameResource.instance.list_symbols[position];
-						setGift(position,x,y);
-						d.dismiss();
-					}
-				});
+							@Override
+							public void onItemClick(AdapterView<?> arg0,
+									View arg1, int position, long arg3) {
+								// TODO Auto-generated method stub
+								// Toast.makeText(instance, "" + position,
+								// Toast.LENGTH_LONG).show();
+								content_Chat = GameResource.instance.list_symbols[position];
+								setGift(position, x, y);
+								d.dismiss();
+							}
+						});
 
 				// TODO Chat
 				final EditText chat = (EditText) v.findViewById(R.id.chat);
@@ -735,15 +779,16 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	public void showDialog_Okie_withCommand(final String title, final String content,
-			final IAction okie) {
+	public void showDialog_Okie_withCommand(final String title,
+			final String content, final IAction okie) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_matketnoi, null, false);
+				View v = inflater
+						.inflate(R.layout.popup_matketnoi, null, false);
 
 				if (d != null)
 					d.dismiss();
@@ -756,7 +801,8 @@ public class HDCGameMidlet extends Activity {
 				TextView txtTitle = (TextView) v.findViewById(R.id.txtTitle);
 				txtTitle.setText(title.toString());
 				// TODO Content
-				TextView txtContent = (TextView) v.findViewById(R.id.txtContent);
+				TextView txtContent = (TextView) v
+						.findViewById(R.id.txtContent);
 				txtContent.setText(content.toString());
 
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
@@ -776,8 +822,9 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	// Thông báo bằng Toast của Android
-	public void showDialog_yes_no(final String title, final String content, final IAction yes) {
+	// ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
+	public void showDialog_yes_no(final String title, final String content,
+			final IAction yes) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -797,9 +844,10 @@ public class HDCGameMidlet extends Activity {
 				TextView txtTitle = (TextView) v.findViewById(R.id.txtTitle);
 				txtTitle.setText(title.toString());
 				// TODO Content
-				TextView txtContent = (TextView) v.findViewById(R.id.txtContent);
+				TextView txtContent = (TextView) v
+						.findViewById(R.id.txtContent);
 				txtContent.setText(content.toString());
-				// TODO Button Đồng ý
+				// TODO Button Ä�á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -810,7 +858,7 @@ public class HDCGameMidlet extends Activity {
 						d.dismiss();
 					}
 				});
-				// TODO button Hủy
+				// TODO button Há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -827,9 +875,9 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	// Thông báo bằng Toast của Android
-	public void showDialog_ketban(final String title, final String content, final IAction yes,
-			final IAction no) {
+	// ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
+	public void showDialog_ketban(final String title, final String content,
+			final IAction yes, final IAction no) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -849,9 +897,10 @@ public class HDCGameMidlet extends Activity {
 				TextView txtTitle = (TextView) v.findViewById(R.id.txtTitle);
 				txtTitle.setText(title.toString());
 				// TODO Content
-				TextView txtContent = (TextView) v.findViewById(R.id.txtContent);
+				TextView txtContent = (TextView) v
+						.findViewById(R.id.txtContent);
 				txtContent.setText(content.toString());
-				// TODO Button Đồng ý
+				// TODO Button Ä�á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -862,7 +911,7 @@ public class HDCGameMidlet extends Activity {
 						d.dismiss();
 					}
 				});
-				// TODO button Hủy
+				// TODO button Há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -880,7 +929,7 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	// Thông báo bằng Toast của Android
+	// ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
 	public void showDialog_DoiDina() {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
@@ -897,10 +946,11 @@ public class HDCGameMidlet extends Activity {
 						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
 				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-				// TODO Edittext "Số dina"
-				final EditText mEdittext = (EditText) v.findViewById(R.id.sodina);
+				// TODO Edittext "Sá»‘ dina"
+				final EditText mEdittext = (EditText) v
+						.findViewById(R.id.sodina);
 
-				// TODO button đồng ý
+				// TODO button Ä‘á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -910,19 +960,21 @@ public class HDCGameMidlet extends Activity {
 						int dina = 0;
 
 						try {
-							dina = Integer.parseInt(mEdittext.getText().toString());
+							dina = Integer.parseInt(mEdittext.getText()
+									.toString());
 
 							GlobalService.onChangeDinaToGold(dina);
 
 							// GameCanvas.endDlg();
 							d.dismiss();
 						} catch (Exception ex) {
-							// GameCanvas.startOKDlg("Không hợp lệ");
-							showDialog_Okie("Thông báo", "Không thể đổi số dina này !!!");
+							// GameCanvas.startOKDlg("KhÃ´ng há»£p lá»‡");
+							showDialog_Okie("ThÃ´ng bÃ¡o",
+									"KhÃ´ng thá»ƒ Ä‘á»•i sá»‘ dina nÃ y !!!");
 						}
 					}
 				});
-				// TODO button hủy
+				// TODO button há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -939,14 +991,15 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	public void showDialog_ChuyenGold(final String title,final IAction action) {
+	public void showDialog_ChuyenGold(final String title, final IAction action) {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_chuyengold, null, false);
+				View v = inflater.inflate(R.layout.popup_chuyengold, null,
+						false);
 
 				if (d != null)
 					d.dismiss();
@@ -955,13 +1008,14 @@ public class HDCGameMidlet extends Activity {
 						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
 				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-				TextView m_title = (TextView)v.findViewById(R.id.title);
+				TextView m_title = (TextView) v.findViewById(R.id.title);
 				m_title.setText(title);
-				
-				// TODO Edittext "Số dina"
-				final EditText mEdittext = (EditText) v.findViewById(R.id.sodina);
 
-				// TODO button đồng ý
+				// TODO Edittext "Sá»‘ dina"
+				final EditText mEdittext = (EditText) v
+						.findViewById(R.id.sodina);
+
+				// TODO button Ä‘á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -972,7 +1026,7 @@ public class HDCGameMidlet extends Activity {
 						d.dismiss();
 					}
 				});
-				// TODO button hủy
+				// TODO button há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -988,7 +1042,7 @@ public class HDCGameMidlet extends Activity {
 			}
 		});
 	}
-	
+
 	public void showDialog_DatTienCuoc() {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
@@ -996,7 +1050,8 @@ public class HDCGameMidlet extends Activity {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_dattiencuoc, null, false);
+				View v = inflater.inflate(R.layout.popup_dattiencuoc, null,
+						false);
 
 				if (d != null)
 					d.dismiss();
@@ -1005,10 +1060,11 @@ public class HDCGameMidlet extends Activity {
 						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
 				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-				// TODO Edittext "Số dina"
-				final EditText mEdittext = (EditText) v.findViewById(R.id.tiencuoc);
+				// TODO Edittext "Sá»‘ dina"
+				final EditText mEdittext = (EditText) v
+						.findViewById(R.id.tiencuoc);
 
-				// TODO button đồng ý
+				// TODO button Ä‘á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -1017,23 +1073,24 @@ public class HDCGameMidlet extends Activity {
 						// TODO Auto-generated method stub
 						long gold;
 						try {
-							gold = Long.parseLong(mEdittext.getText().toString().trim());
+							gold = Long.parseLong(mEdittext.getText()
+									.toString().trim());
 						} catch (Exception ex) {
 							// GameCanvas.startOKDlg(GameResource.invalid);
-							HDCGameMidlet.instance.showDialog_Okie("Thông báo",
-									GameResource.invalid);
+							HDCGameMidlet.instance.showDialog_Okie(
+									"ThÃ´ng bÃ¡o", GameResource.invalid);
 							return;
 						}
 						if (gold >= 0)
 							GlobalService.sendMessageSetBetGoldForTable(gold);
 						else
 							// GameCanvas.startOKDlg(GameResource.moneyInvalid);
-							HDCGameMidlet.instance.showDialog_Okie("Thông báo",
-									GameResource.moneyInvalid);
+							HDCGameMidlet.instance.showDialog_Okie(
+									"ThÃ´ng bÃ¡o", GameResource.moneyInvalid);
 						d.dismiss();
 					}
 				});
-				// TODO button hủy
+				// TODO button há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -1057,7 +1114,8 @@ public class HDCGameMidlet extends Activity {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_datmatkhau, null, false);
+				View v = inflater.inflate(R.layout.popup_datmatkhau, null,
+						false);
 
 				if (d != null)
 					d.dismiss();
@@ -1066,10 +1124,11 @@ public class HDCGameMidlet extends Activity {
 						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
 				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-				// TODO Edittext "Số dina"
-				final EditText mEdittext = (EditText) v.findViewById(R.id.matkhau);
+				// TODO Edittext "Sá»‘ dina"
+				final EditText mEdittext = (EditText) v
+						.findViewById(R.id.matkhau);
 
-				// TODO button đồng ý
+				// TODO button Ä‘á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -1077,13 +1136,13 @@ public class HDCGameMidlet extends Activity {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						if (mEdittext.getText().toString().trim() != "") {
-							GlobalService.onSetPasswordForTable(boardId, mEdittext.getText()
-									.toString().trim());
+							GlobalService.onSetPasswordForTable(boardId,
+									mEdittext.getText().toString().trim());
 						}
 						d.dismiss();
 					}
 				});
-				// TODO button hủy
+				// TODO button há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -1100,7 +1159,7 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	// Thông báo bằng Toast của Android
+	// ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
 	public void showDialog_DoiMatKhau() {
 		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
 			@Override
@@ -1108,7 +1167,8 @@ public class HDCGameMidlet extends Activity {
 				// TODO Auto-generated method stub
 				LayoutInflater inflater = (LayoutInflater) instance
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View v = inflater.inflate(R.layout.popup_doimatkhau, null, false);
+				View v = inflater.inflate(R.layout.popup_doimatkhau, null,
+						false);
 
 				if (d != null)
 					d.dismiss();
@@ -1117,14 +1177,17 @@ public class HDCGameMidlet extends Activity {
 						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
 				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-				// TODO EditText Mât khẩu cũ
-				final EditText m_MatKhauCu = (EditText) v.findViewById(R.id.matkhau_cu);
-				// TODO EditText Mât khẩu mới
-				final EditText m_MatKhauMoi = (EditText) v.findViewById(R.id.matkhau_moi);
-				// TODO EditText Mât khẩu nhập lại
-				final EditText m_MatKhauNhapLai = (EditText) v.findViewById(R.id.nhapmatkhau_moi);
+				// TODO EditText MÃ¢t kháº©u cÅ©
+				final EditText m_MatKhauCu = (EditText) v
+						.findViewById(R.id.matkhau_cu);
+				// TODO EditText MÃ¢t kháº©u má»›i
+				final EditText m_MatKhauMoi = (EditText) v
+						.findViewById(R.id.matkhau_moi);
+				// TODO EditText MÃ¢t kháº©u nháº­p láº¡i
+				final EditText m_MatKhauNhapLai = (EditText) v
+						.findViewById(R.id.nhapmatkhau_moi);
 
-				// TODO Đồng ý
+				// TODO Ä�á»“ng Ã½
 				Button bt1 = (Button) v.findViewById(R.id.bt_DongY);
 				bt1.setOnClickListener(new OnClickListener() {
 
@@ -1132,20 +1195,23 @@ public class HDCGameMidlet extends Activity {
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						if (m_MatKhauMoi.getText().toString().length() < 5) {
-							HDCGameMidlet.instance.showDialog_Okie("Thông báo",
-									"Mật khẩu phải nhiều hơn 5 kí tự");
+							HDCGameMidlet.instance
+									.showDialog_Okie("ThÃ´ng bÃ¡o",
+											"Máº­t kháº©u pháº£i nhiá»�u hÆ¡n 5 kÃ­ tá»±");
 							return;
 						}
-						if (!m_MatKhauMoi.getText().equals(m_MatKhauNhapLai.getText())) {
-							// GameCanvas.startOKDlg("Mật khẩu nhập lại không khớp");
-							HDCGameMidlet.instance.showDialog_Okie("Thông báo",
-									"Mật khẩu nhập lại không khớp");
+						if (!m_MatKhauMoi.getText().equals(
+								m_MatKhauNhapLai.getText())) {
+							// GameCanvas.startOKDlg("Máº­t kháº©u nháº­p láº¡i khÃ´ng khá»›p");
+							HDCGameMidlet.instance.showDialog_Okie(
+									"ThÃ´ng bÃ¡o",
+									"Máº­t kháº©u nháº­p láº¡i khÃ´ng khá»›p");
 							return;
 						}
 
 						// GameCanvas
 						// .startOKDlg(
-						// "Bạn chắc chắn muốn thay đổi mật khẩu ?. Một tin nhắn kết quả sẽ trả về cho bạn.",
+						// "Báº¡n cháº¯c cháº¯n muá»‘n thay Ä‘á»•i máº­t kháº©u ?. Má»™t tin nháº¯n káº¿t quáº£ sáº½ tráº£ vá»� cho báº¡n.",
 						// new IAction() {
 						// public void perform() {
 						// GlobalService.doRequestChangePass(
@@ -1158,13 +1224,18 @@ public class HDCGameMidlet extends Activity {
 
 						HDCGameMidlet.instance
 								.showDialog_yes_no(
-										"Thông báo",
-										"Bạn chắc chắn muốn thay đổi mật khẩu ?. Một tin nhắn kết quả sẽ trả về cho bạn.",
+										"ThÃ´ng bÃ¡o",
+										"Báº¡n cháº¯c cháº¯n muá»‘n thay Ä‘á»•i máº­t kháº©u ?. Má»™t tin nháº¯n káº¿t quáº£ sáº½ tráº£ vá»� cho báº¡n.",
 										new IAction() {
 											public void perform() {
-												GlobalService.doRequestChangePass(m_MatKhauCu
-														.getText().toString(), m_MatKhauMoi
-														.getText().toString());
+												GlobalService
+														.doRequestChangePass(
+																m_MatKhauCu
+																		.getText()
+																		.toString(),
+																m_MatKhauMoi
+																		.getText()
+																		.toString());
 												// InputScr.gI().close();
 												d.dismiss();
 												GameCanvas.startWaitDlg();
@@ -1173,7 +1244,7 @@ public class HDCGameMidlet extends Activity {
 					}
 				});
 
-				// TODO Hủy
+				// TODO Há»§y
 				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
 				bt2.setOnClickListener(new OnClickListener() {
 
@@ -1190,15 +1261,15 @@ public class HDCGameMidlet extends Activity {
 		});
 	}
 
-	// Thông báo bằng Toast của Android
+	// ThÃ´ng bÃ¡o báº±ng Toast cá»§a Android
 	public void Toast(final String msg) {
-//		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
-//			@Override
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
-//			}
-//		});
+		// HDCGameMidlet.instance.runOnUiThread(new Runnable() {
+		// @Override
+		// public void run() {
+		// // TODO Auto-generated method stub
+		// Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
+		// }
+		// });
 	}
 
 	public static void sendSMS(String data, String to) {
@@ -1207,20 +1278,22 @@ public class HDCGameMidlet extends Activity {
 			public void perform() {
 
 				// GameCanvas.startOKDlg(GameResource.smsSent);
-				HDCGameMidlet.instance.showDialog_Okie("Thông báo", GameResource.smsSent);
+				HDCGameMidlet.instance.showDialog_Okie("ThÃ´ng bÃ¡o",
+						GameResource.smsSent);
 			}
 		}, new IAction() {
 
 			public void perform() {
 
 				// GameCanvas.startOKDlg(GameResource.sendSMSFail);
-				HDCGameMidlet.instance.showDialog_Okie("Thông báo", GameResource.sendSMSFail);
+				HDCGameMidlet.instance.showDialog_Okie("ThÃ´ng bÃ¡o",
+						GameResource.sendSMSFail);
 			}
 		});
 	}
 
-	public static void sendSMS(final String data, final String to, final IAction successAction,
-			final IAction failAction) {
+	public static void sendSMS(final String data, final String to,
+			final IAction successAction, final IAction failAction) {
 		final String address = to;
 
 		new Thread(new Runnable() {
@@ -1230,10 +1303,10 @@ public class HDCGameMidlet extends Activity {
 
 					String SENT = "SMS_SENT";
 					String DELIVERED = "SMS_DELIVERED";
-					PendingIntent sentPI = PendingIntent.getBroadcast(instance, 0,
-							new Intent(SENT), 0);
-					PendingIntent deliveredPI = PendingIntent.getBroadcast(instance, 0, new Intent(
-							DELIVERED), 0);
+					PendingIntent sentPI = PendingIntent.getBroadcast(instance,
+							0, new Intent(SENT), 0);
+					PendingIntent deliveredPI = PendingIntent.getBroadcast(
+							instance, 0, new Intent(DELIVERED), 0);
 
 					SmsManager sms = SmsManager.getDefault();
 					// Log.e("SkyGardenGame", data + " --->>> " + address);
@@ -1272,7 +1345,8 @@ public class HDCGameMidlet extends Activity {
 						}
 					}, new IntentFilter(SENT));
 
-					sms.sendTextMessage(address, null, data, sentPI, deliveredPI);
+					sms.sendTextMessage(address, null, data, sentPI,
+							deliveredPI);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -1306,7 +1380,7 @@ public class HDCGameMidlet extends Activity {
 		} catch (Exception e) {
 		}
 
-		// lưu file text để check image trong internal storage
+		// lÆ°u file text Ä‘á»ƒ check image trong internal storage
 		// if (!FileManager.fileTxtIsExits()) {
 		// for (int i = 0; i < GameResource.instance.imgHD.length; i++) {
 		// int version = FileManager.loadFile("server/hd" + i + ".png").length %
@@ -1323,7 +1397,9 @@ public class HDCGameMidlet extends Activity {
 		GameCanvas.instance.initGameCanvas();
 
 		// display login screen
-		GameCanvas.loginScr.switchToMe();
+		// GameCanvas.loginScr.switchToMe();
+		Intent intent = new Intent(instance, Login.class);
+		startActivity(intent);
 
 	}
 
@@ -1345,7 +1421,28 @@ public class HDCGameMidlet extends Activity {
 			// gameCanvas.mSound.play();
 		}
 
+		if (Login.instance != null) {
+			Toast("Login!=null");
+			if (Login.instance.flagState == 0) {
+				finish();
+			}
+		}else{			
+//			if(flagExit){
+//				Toast("flagExit : true");
+//				finish();
+//			}else{
+//				Toast("flagExit : false");
+//			}
+		}
+
 	}
+	
+//	@Override
+//	protected void onDestroy() {
+//		// TODO Auto-generated method stub
+//		super.onDestroy();
+//		android.os.Process.killProcess(android.os.Process.myPid());
+//	}
 
 	@Override
 	protected void onPause() {
@@ -1354,6 +1451,10 @@ public class HDCGameMidlet extends Activity {
 		wakeLock.release();
 		gameCanvas.pause();
 		// gameCanvas.mSound.pause();
+
+		// if(Login.instance.flagState == 0){
+		// finish();
+		// }
 	}
 
 	@Override
@@ -1397,7 +1498,8 @@ public class HDCGameMidlet extends Activity {
 	// // AlertDialog.Builder builder = new AlertDialog.Builder(
 	// // MyListActivity.this);
 	// // builder.setMessage(
-	// // "Bạn có muốn nhắn tin \n để tải hình ảnh về không ?")
+	// //
+	// "Báº¡n cÃ³ muá»‘n nháº¯n tin \n Ä‘á»ƒ táº£i hÃ¬nh áº£nh vá»� khÃ´ng ?")
 	// // .setCancelable(false)
 	// // .setPositiveButton("Yes",
 	// // new DialogInterface.OnClickListener() {
@@ -1413,7 +1515,7 @@ public class HDCGameMidlet extends Activity {
 	// // + ConnectServer.m_UserID
 	// // + ConnectServer.SPACE
 	// // + ConnectServer.instance.REF_CODE;
-	// // // gửi tin nhắn
+	// // // gá»­i tin nháº¯n
 	// // sendSMS(sms,
 	// // ConnectServer.instance.m_Sms
 	// // .getNumber());
@@ -1442,7 +1544,8 @@ public class HDCGameMidlet extends Activity {
 
 	// TODO dialog waiting
 	public void showDialog_Waitting(String title) {
-		customDialog = new Dialog(instance, android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+		customDialog = new Dialog(instance,
+				android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
 		customDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 		LayoutInflater inflater = (LayoutInflater) instance
@@ -1465,23 +1568,29 @@ public class HDCGameMidlet extends Activity {
 			public void run() {
 				// TODO Auto-generated method stub
 				AlertDialog.Builder builder = new AlertDialog.Builder(instance);
-				builder.setMessage("Are you sure you want to exit?").setCancelable(false)
-						.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								instance.finish();
-							}
-						}).setNegativeButton("No", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								dialog.cancel();
-							}
-						});
+				builder.setMessage("Are you sure you want to exit?")
+						.setCancelable(false)
+						.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										instance.finish();
+									}
+								})
+						.setNegativeButton("No",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										dialog.cancel();
+									}
+								});
 				AlertDialog alert = builder.create();
 				alert.show();
 			}
 		});
 	}
 
-	// TODO show dialog "Tố tiền đặt cược"
+	// TODO show dialog "Tá»‘ tiá»�n Ä‘áº·t cÆ°á»£c"
 	long money = 0;
 
 	public void showDialog_ToTienCuoc(final long maxMoney, final long betMoney) {
@@ -1505,7 +1614,8 @@ public class HDCGameMidlet extends Activity {
 				// d.show();
 
 				// TODO set max money
-				TextView mMaxMoney = (TextView) layout.findViewById(R.id.txt_maxmoney);
+				TextView mMaxMoney = (TextView) layout
+						.findViewById(R.id.txt_maxmoney);
 				try {
 					mMaxMoney.setText("$" + Long.toString(maxMoney));
 				} catch (Exception e) {
@@ -1513,7 +1623,8 @@ public class HDCGameMidlet extends Activity {
 				}
 
 				// TODO money
-				final EditText mMoney = (EditText) layout.findViewById(R.id.editText1);
+				final EditText mMoney = (EditText) layout
+						.findViewById(R.id.editText1);
 				mMoney.setText(Long.toString(betMoney));
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -1521,7 +1632,8 @@ public class HDCGameMidlet extends Activity {
 				final AlertDialog alert = builder.create();
 
 				// TODO button
-				final Button mButton = (Button) layout.findViewById(R.id.button1);
+				final Button mButton = (Button) layout
+						.findViewById(R.id.button1);
 				mButton.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -1541,7 +1653,8 @@ public class HDCGameMidlet extends Activity {
 				// alert.show();
 				d.show();
 
-				SeekBar mSeekBar = (SeekBar) layout.findViewById(com.hdc.mycasino.R.id.seekBar1);
+				SeekBar mSeekBar = (SeekBar) layout
+						.findViewById(com.hdc.mycasino.R.id.seekBar1);
 				mSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
 					@Override
@@ -1557,7 +1670,8 @@ public class HDCGameMidlet extends Activity {
 					}
 
 					@Override
-					public void onProgressChanged(SeekBar arg0, int sum, boolean arg2) {
+					public void onProgressChanged(SeekBar arg0, int sum,
+							boolean arg2) {
 						// TODO Auto-generated method stub
 						money = (long) (sum * maxMoney) / 100;
 						mMoney.setText(Long.toString(money));
@@ -1572,7 +1686,8 @@ public class HDCGameMidlet extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		super.onCreateOptionsMenu(menu);
-		if (gameCanvas.currentScreen != null && !(gameCanvas.currentScreen instanceof LoginScr)) {
+		if (gameCanvas.currentScreen != null
+				&& !(gameCanvas.currentScreen instanceof LoginScr)) {
 			gameCanvas.currentScreen.actionMenu();
 		}
 		return false;
@@ -1581,7 +1696,7 @@ public class HDCGameMidlet extends Activity {
 	@SuppressWarnings("static-access")
 	@Override
 	public void onBackPressed() {
-		// TODO đóng menu
+		// TODO Ä‘Ã³ng menu
 		if (gameCanvas.menu.m_showMenu) {
 			gameCanvas.menu.m_showMenu = false;
 			return;
