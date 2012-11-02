@@ -1,5 +1,6 @@
 ﻿package com.hdc.mycasino.messageHandler;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import com.hdc.mycasino.GameCanvas;
 import com.hdc.mycasino.HDCGameMidlet;
 import com.hdc.mycasino.Login;
 import com.hdc.mycasino.SelectGame;
+import com.hdc.mycasino.SelectRoom;
 import com.hdc.mycasino.customcontrol.CustomDialog;
 import com.hdc.mycasino.font.BitmapFont;
 import com.hdc.mycasino.model.BoardInfo;
@@ -774,7 +776,8 @@ public class GlobalMsgHandler implements IMessageHandler {
 			// ////////////
 			list = new Vector();
 			// List normal rooms.
-			count = readListRooms(list, message);
+//			count = readListRooms(list, message);
+			readListRooms(message);
 
 			// SeperatorInfo seperatorInfo;
 			// if (count > 0) {
@@ -830,7 +833,11 @@ public class GlobalMsgHandler implements IMessageHandler {
 			center = null;
 
 			GameCanvas.endDlg();
-			System.gc();
+//			System.gc();
+			
+			CustomDialog.instance.gI().endDialog();
+			Intent intent = new Intent(SelectGame.instance, SelectRoom.class);
+			SelectGame.instance.startActivity(intent);
 			break;
 
 		case CMD.CMD_PLAYER_JOIN_TABLE:
@@ -2547,6 +2554,26 @@ public class GlobalMsgHandler implements IMessageHandler {
 		}
 		return numberRoom;
 	}
+	
+	private void readListRooms(Message message) {
+		int numberRoom = MessageIO.readInt(message);
+		RoomInfo room;
+		ArrayList<RoomInfo> aa = new ArrayList<RoomInfo>();
+		for (int i = 0; i < numberRoom; i++) {
+			room = new RoomInfo();
+			room.type = MessageIO.readInt(message);
+			room.itemName = MessageIO.readString(message);
+			room.itemId = MessageIO.readInt(message);
+			room.goldJoinRoom = MessageIO.readLong(message);
+			room.status = MessageIO.readByte(message);
+			room.minBetGold = MessageIO.readLong(message);
+//			vt.addElement(room);
+			aa.add(room);
+		}
+		
+		SelectGame.instance.m_LstRoomInfo = aa;
+		
+	}	
 
 	private void readListPlayers(Message message, Vector vt) {
 		int total = MessageIO.readByte(message);
