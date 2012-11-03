@@ -39,6 +39,7 @@ public class CustomDialog {
 	public void setContext(Context m_Context) {
 		c = m_Context;
 	}
+		
 
 	Dialog customDialog;
 
@@ -356,4 +357,47 @@ public class CustomDialog {
 		});
 	}
 
+	
+	public void showDialog_Okie_withCommand(final String title,
+			final String content, final IAction okie) {
+		HDCGameMidlet.instance.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				LayoutInflater inflater = (LayoutInflater) c
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View v = inflater
+						.inflate(R.layout.popup_matketnoi, null, false);
+
+				if (d != null)
+					d.dismiss();
+
+				/* final Dialog */d = new Dialog(c,
+						android.R.style.Theme_Translucent_NoTitleBar_Fullscreen);
+				d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+				// TODO Title
+				TextView txtTitle = (TextView) v.findViewById(R.id.txtTitle);
+				txtTitle.setText(title.toString());
+				// TODO Content
+				TextView txtContent = (TextView) v
+						.findViewById(R.id.txtContent);
+				txtContent.setText(content.toString());
+
+				Button bt2 = (Button) v.findViewById(R.id.bt_Huy);
+				bt2.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						okie.perform();
+						d.dismiss();
+					}
+				});
+
+				d.setContentView(v);
+				d.show();
+			}
+		});
+	}	
 }

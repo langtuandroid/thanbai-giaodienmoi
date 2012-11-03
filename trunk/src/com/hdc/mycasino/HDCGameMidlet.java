@@ -1398,9 +1398,18 @@ public class HDCGameMidlet extends Activity {
 
 		// display login screen
 		// GameCanvas.loginScr.switchToMe();
-		Intent intent = new Intent(instance, Login.class);
-		startActivity(intent);
 
+		if (Login.instance == null) {
+			Intent intent = new Intent(instance, Login.class);
+			startActivity(intent);
+		}else{
+//			GameCanvas.loginScr.switchToMe();
+		}
+
+	}
+
+	public void resume() {
+		onResume();
 	}
 
 	public static void destroy() {
@@ -1426,23 +1435,23 @@ public class HDCGameMidlet extends Activity {
 			if (Login.instance.flagState == 0) {
 				finish();
 			}
-		}else{			
-//			if(flagExit){
-//				Toast("flagExit : true");
-//				finish();
-//			}else{
-//				Toast("flagExit : false");
-//			}
+		} else {
+			// if(flagExit){
+			// Toast("flagExit : true");
+			// finish();
+			// }else{
+			// Toast("flagExit : false");
+			// }
 		}
 
 	}
-	
-//	@Override
-//	protected void onDestroy() {
-//		// TODO Auto-generated method stub
-//		super.onDestroy();
-//		android.os.Process.killProcess(android.os.Process.myPid());
-//	}
+
+	// @Override
+	// protected void onDestroy() {
+	// // TODO Auto-generated method stub
+	// super.onDestroy();
+	// android.os.Process.killProcess(android.os.Process.myPid());
+	// }
 
 	@Override
 	protected void onPause() {

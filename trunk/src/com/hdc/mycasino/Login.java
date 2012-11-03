@@ -386,35 +386,36 @@ public class Login extends Activity implements OnClickListener {
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
-		switch (flagState) {
-		case 0:
-			//đăng nhập : hỏi thoát game
-			THOAT_GAME();
-			break;
-		case 1:
-		case 2:
-			//đăng ký && quên mật khẩu : back trở về đăng nhập
-			flagState = 0;
-			//enable UserName and Password
-			edit_UserName.setVisibility(View.VISIBLE);
-			edit_Pass.setVisibility(View.VISIBLE);
-			edit_RePass.setVisibility(View.GONE);
-			//enable button DangNhap && DangKy
-			bt_DangNhap.setVisibility(View.VISIBLE);
-			bt_DangKy.setVisibility(View.VISIBLE);
-			bt_ReDangKy.setVisibility(View.GONE);
-			bt_QuenMK.setVisibility(View.GONE);
-			//enable check box 'Nho Thong tin'
-			check_NhoMK.setVisibility(View.VISIBLE);			
-			break;
-		case 3:
-			//đăng nhập thành công
-//			super.onBackPressed();			
-			break;
-		default:
-			break;
-		}
+//		switch (flagState) {
+//		case 0:
+//			//đăng nhập : hỏi thoát game
+//			THOAT_GAME();
+//			break;
+//		case 1:
+//		case 2:
+//			//đăng ký && quên mật khẩu : back trở về đăng nhập
+//			flagState = 0;
+//			//enable UserName and Password
+//			edit_UserName.setVisibility(View.VISIBLE);
+//			edit_Pass.setVisibility(View.VISIBLE);
+//			edit_RePass.setVisibility(View.GONE);
+//			//enable button DangNhap && DangKy
+//			bt_DangNhap.setVisibility(View.VISIBLE);
+//			bt_DangKy.setVisibility(View.VISIBLE);
+//			bt_ReDangKy.setVisibility(View.GONE);
+//			bt_QuenMK.setVisibility(View.GONE);
+//			//enable check box 'Nho Thong tin'
+//			check_NhoMK.setVisibility(View.VISIBLE);			
+//			break;
+//		case 3:
+//			//đăng nhập thành công
+////			super.onBackPressed();			
+//			break;
+//		default:
+//			break;
+//		}
 		
+		super.onBackPressed();
 		
 		
 		

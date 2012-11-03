@@ -9,19 +9,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 
-import com.danh.customcontrol.ListRecordAdapter;
+import com.danh.customcontrol.ListRoomAdapter;
 import com.hdc.mycasino.customcontrol.CustomDialog;
+import com.hdc.mycasino.model.BoardInfo;
 import com.hdc.mycasino.model.RoomInfo;
+import com.hdc.mycasino.screen.PlayGameScr;
+import com.hdc.mycasino.screen.TabScr;
+import com.hdc.mycasino.service.GlobalService;
+import com.hdc.mycasino.utilities.GameResource;
 
-public class SelectRoom extends Activity{
+public class SelectRoom extends Activity implements OnItemClickListener{
 
+	public static SelectRoom instance;
 	private TabHost mTabHost;
+	public ArrayList<BoardInfo> m_listBoardInfo = new ArrayList<BoardInfo>(); 
 
 	private void setupTabHost() {
 		mTabHost = (TabHost) findViewById(android.R.id.tabhost);
@@ -38,6 +47,8 @@ public class SelectRoom extends Activity{
 		// construct the tabhost
 		setContentView(R.layout.select_room);
 
+		instance = this;
+		
 		//set context for dialog
 		CustomDialog.instance.gI().setContext(this);
 		
@@ -50,7 +61,7 @@ public class SelectRoom extends Activity{
 		LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = (View)inflater.inflate(R.layout.tabcontent_1, null, false);
 		
-		ArrayList<String> aa = new ArrayList<String>();
+//		ArrayList<String> aa = new ArrayList<String>();
 //		ArrayList<RoomInfo> data = new ArrayList<RoomInfo>();
 //		data = SelectGame.instance.m_LstRoomInfo;
 //		for(int i = 0 ; i <  data.size(); i++){
@@ -58,7 +69,8 @@ public class SelectRoom extends Activity{
 //		}
 		
 		ListView listView = (ListView)v.findViewById(R.id.listView);
-		listView.setAdapter(new ListRecordAdapter(SelectRoom.this, R.layout.item_listview, SelectGame.instance.m_LstRoomInfo));
+		listView.setAdapter(new ListRoomAdapter(SelectRoom.this, R.layout.item_listview_room, SelectGame.instance.m_LstRoomInfo));
+		listView.setOnItemClickListener(this);
 		
 		TextView t2 = new TextView(this);
 		t2.setText("dadsa fdfsd sd");
@@ -88,6 +100,29 @@ public class SelectRoom extends Activity{
 		TextView tv = (TextView) view.findViewById(R.id.tabsText);
 		tv.setText(text);
 		return view;
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+		// TODO Auto-generated method stub
+//		GameCanvas.startWaitDlg();
+		CustomDialog.instance.gI().showDialog_Waitting(GameResource.plzWait);
+		
+		RoomInfo room = (RoomInfo) SelectGame.instance.m_LstRoomInfo.get(position);
+
+		GlobalService.onJoinRoom(room.itemId);
+		PlayGameScr.roomId = room.itemId;
+		try {
+			PlayGameScr.roomCode = Integer.parseInt(room.itemName);
+		} catch (Exception e) {
+			PlayGameScr.roomCode = 0;
+		}
 	}	
 	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		CustomDialog.instance.setContext(SelectGame.instance);
+		super.onBackPressed();
+	}
 }

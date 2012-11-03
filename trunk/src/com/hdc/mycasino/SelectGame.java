@@ -42,9 +42,9 @@ public class SelectGame extends Activity implements OnItemClickListener,
 	public final static byte XI_DACH = 5;
 	public final static byte BACK_JACK = 6;
 	public final static byte POKER = 7;
-	
-	public ArrayList<RoomInfo> m_LstRoomInfo = new ArrayList<RoomInfo>();	
-	
+
+	public ArrayList<RoomInfo> m_LstRoomInfo = new ArrayList<RoomInfo>();
+
 	public static SelectGame instance;
 
 	// TODO galary to select game
@@ -127,14 +127,15 @@ public class SelectGame extends Activity implements OnItemClickListener,
 		txt_Dina.setOnClickListener(this);
 
 		// TODO set information for nick,level,gold,dina
-		txt_Nick.setText(HDCGameMidlet.m_myPlayerInfo.itemName);
-		txt_Level.setText("Level : " + HDCGameMidlet.m_myPlayerInfo.level);
-		txt_Gold.setText(HDCGameMidlet.m_myPlayerInfo.gold + "");
-		txt_Dina.setText(HDCGameMidlet.m_myPlayerInfo.dina + "");
-		imgAvatar.setImageBitmap(Image.createBitmapFromSrc(
-				GameResource.instance.imgAvatar, 0,
-				HDCGameMidlet.m_myPlayerInfo.avatarId * 64, 64, 64));
-
+		if (HDCGameMidlet.m_myPlayerInfo != null) {
+			txt_Nick.setText(HDCGameMidlet.m_myPlayerInfo.itemName);
+			txt_Level.setText("Level : " + HDCGameMidlet.m_myPlayerInfo.level);
+			txt_Gold.setText(HDCGameMidlet.m_myPlayerInfo.gold + "");
+			txt_Dina.setText(HDCGameMidlet.m_myPlayerInfo.dina + "");
+			imgAvatar.setImageBitmap(Image.createBitmapFromSrc(
+					GameResource.instance.imgAvatar, 0,
+					HDCGameMidlet.m_myPlayerInfo.avatarId * 64, 64, 64));
+		}
 	}
 
 	class CustomGalleryImageAdapter extends BaseAdapter {
@@ -191,14 +192,15 @@ public class SelectGame extends Activity implements OnItemClickListener,
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long arg3) {
 		// TODO Auto-generated method stub
-//		Toast.makeText(this, "" + position, Toast.LENGTH_LONG).show();
-		
+		// Toast.makeText(this, "" + position, Toast.LENGTH_LONG).show();
+
 		switch (position) {
 		case 0:
-			//tiến lên miền nam
-//			ListBoardScr.getInstance().m_strTitleGame = getGameNameById(TLMN);
-//			ListStringScr.gI().m_iSelectedTypeGame = TLMN;
-//			GameCanvas.startWaitDlg();
+			// tiến lên miền nam
+			// ListBoardScr.getInstance().m_strTitleGame =
+			// getGameNameById(TLMN);
+			// ListStringScr.gI().m_iSelectedTypeGame = TLMN;
+			// GameCanvas.startWaitDlg();
 			CustomDialog.instance.showDialog_Waitting(GameResource.plzWait);
 			GlobalService.sendMessageIsRegisteredCompetition(TLMN);
 			GlobalService.onSendGameID((byte) TLMN);
