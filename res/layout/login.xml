@@ -115,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:text="      Nhớ mật khẩu"
                     android:visibility="visible" />
-
+
                 <EditText
                     android:id="@+id/txtRePass"
                     android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                     android:background="@drawable/textfield_enable"
                     android:ems="10"
                     android:enabled="true"
-                    android:hint="Nhập lại mật khẩu ...."
+                    android:hint="Mật khẩu .."
                     android:paddingLeft="5dp"
                     android:password="true"
                     android:singleLine="true"

@@ -13,14 +13,14 @@ import android.widget.TextView;
 import com.hdc.mycasino.R;
 import com.hdc.mycasino.model.RoomInfo;
 
-public class ListRecordAdapter extends ArrayAdapter<RoomInfo> {
+public class ListRoomAdapter extends ArrayAdapter<RoomInfo> {
 
 	private Context context;
 	private int resourse;
 	private ArrayList<RoomInfo> arraylist = new ArrayList<RoomInfo>();
 	private String link;
 
-	public ListRecordAdapter(Context context, int textViewResourceId,
+	public ListRoomAdapter(Context context, int textViewResourceId,
 			ArrayList<RoomInfo> objects) {
 		super(context, textViewResourceId, objects);
 		// TODO Auto-generated constructor stub

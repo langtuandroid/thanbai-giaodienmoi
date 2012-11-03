@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.hdc.mycasino.GameCanvas;
 import com.hdc.mycasino.HDCGameMidlet;
 import com.hdc.mycasino.Login;
 import com.hdc.mycasino.SelectGame;
 import com.hdc.mycasino.SelectRoom;
+import com.hdc.mycasino.SelectTable;
+import com.hdc.mycasino.SelectTable.UpdateListView;
 import com.hdc.mycasino.customcontrol.CustomDialog;
 import com.hdc.mycasino.font.BitmapFont;
 import com.hdc.mycasino.model.BoardInfo;
@@ -684,33 +687,58 @@ public class GlobalMsgHandler implements IMessageHandler {
 			break;
 
 		case CMD.CMD_PLAYER_JOIN_ROOM:
-			GameCanvas.endDlg();
+//			GameCanvas.endDlg();
+			
+			
+			
 			count = MessageIO.readShort(message);
 			if (count == -1) {
 				// GameCanvas.startOKDlg(MessageIO.readString(message));
 				HDCGameMidlet.instance.showDialog_Okie("Thông báo", MessageIO.readString(message));
 			} else {
 				int roomType = MessageIO.readInt(message);
-				Vector vt = new Vector();
-				for (i = 0; i < count; i++) {
-					boardInfo = new BoardInfo();
-					boardInfo.itemId = MessageIO.readInt(message);
-					boardInfo.isPlaying = (MessageIO.readByte(message) == 0); // status???
-					boardInfo.numberPlayer = MessageIO.readByte(message);
-					boardInfo.isLock = (MessageIO.readByte(message) == 1);
-					boardInfo.betGold = MessageIO.readLong(message);
+//				Vector vt = new Vector();
+//				for (i = 0; i < count; i++) {
+//					boardInfo = new BoardInfo();
+//					boardInfo.itemId = MessageIO.readInt(message);
+//					boardInfo.isPlaying = (MessageIO.readByte(message) == 0); // status???
+//					boardInfo.numberPlayer = MessageIO.readByte(message);
+//					boardInfo.isLock = (MessageIO.readByte(message) == 1);
+//					boardInfo.betGold = MessageIO.readLong(message);
+//					if (roomType == RoomInfo.CLAN) {
+//						readClanNames(boardInfo, message);
+//					}
+//					vt.addElement(boardInfo);
+//				}
+//				Screen mScreen = TabScr.gI();
+//				ListBoardScr.getInstance().setBoardList(vt);
+//				ListBoardScr.getInstance().switchToMe(mScreen, roomType);
+				
+				ArrayList<BoardInfo> aa = new ArrayList<BoardInfo>();
+				BoardInfo m_boardInfo ;
+				for(i = 0 ; i < count ;i++){
+					m_boardInfo = new BoardInfo();
+					m_boardInfo.itemId = MessageIO.readInt(message);
+					m_boardInfo.isPlaying = (MessageIO.readByte(message) == 0); // status???
+					m_boardInfo.numberPlayer = MessageIO.readByte(message);
+					m_boardInfo.isLock = (MessageIO.readByte(message) == 1);
+					m_boardInfo.betGold = MessageIO.readLong(message);
 					if (roomType == RoomInfo.CLAN) {
-						readClanNames(boardInfo, message);
-					}
-					vt.addElement(boardInfo);
+						readClanNames(m_boardInfo, message);
+					}		
+					aa.add(m_boardInfo);
 				}
-				Screen mScreen = TabScr.gI();
-				ListBoardScr.getInstance().setBoardList(vt);
-				ListBoardScr.getInstance().switchToMe(mScreen, roomType);
 
-				vt = null;
+				CustomDialog.instance.gI().endDialog();
+				//set list board to select room
+				SelectRoom.instance.m_listBoardInfo = aa;
+				Intent intent = new Intent(SelectRoom.instance, SelectTable.class);
+				SelectRoom.instance.startActivity(intent);
+				
+//				vt = null;
 				boardInfo = null;
 			}
+			
 			break;
 
 		case CMD.CMD_LIST_ROOM:
@@ -870,10 +898,18 @@ public class GlobalMsgHandler implements IMessageHandler {
 
 				curScr.arrangePlayersInBoard();
 
-				GameCanvas.endDlg();
+//				GameCanvas.endDlg();
+				CustomDialog.instance.gI().endDialog();
 				p = null;
 				master = null;
 
+//				Intent m_intent = new Intent(CustomDialog.instance.c, HDCGameMidlet.class);
+//				CustomDialog.instance.c.startActivity(m_intent);				
+
+				//				Login.instance.onBackPressed();
+				
+//				HDCGameMidlet.instance.resume();
+				
 			} else {
 				// GameCanvas.startOKDlg(MessageIO.readString(message));
 				HDCGameMidlet.instance.showDialog_Okie("Thông báo", MessageIO.readString(message));
@@ -881,6 +917,8 @@ public class GlobalMsgHandler implements IMessageHandler {
 			break;
 
 		case CMD.CMD_UPDATE_ROOM:
+//			CustomDialog.instance.gI().showDialog_Waitting("Cập nhật bàn chơi ...");
+			
 			Vector vt = new Vector();
 			int roomType = MessageIO.readInt(message);
 			boolean isUpdateAll = MessageIO.readBoolean(message);
@@ -905,22 +943,45 @@ public class GlobalMsgHandler implements IMessageHandler {
 
 			} else {
 				tableId = MessageIO.readInt(message);
-				vt = ListBoardScr.getInstance().m_arrItems;
-				if (vt != null && vt.size() > 0) {
-					for (j = 0; j < vt.size(); j++) {
-						boardInfo = (BoardInfo) vt.elementAt(j);
-						if (boardInfo.itemId == tableId) {
-							boardInfo.isPlaying = (MessageIO.readByte(message) == 0);
-							boardInfo.numberPlayer = MessageIO.readByte(message);
-							boardInfo.isLock = (MessageIO.readByte(message) == 1);
-							boardInfo.betGold = MessageIO.readLong(message);
+//				vt = ListBoardScr.getInstance().m_arrItems;
+//				if (vt != null && vt.size() > 0) {
+//					for (j = 0; j < vt.size(); j++) {
+//						boardInfo = (BoardInfo) vt.elementAt(j);
+//						if (boardInfo.itemId == tableId) {
+//							boardInfo.isPlaying = (MessageIO.readByte(message) == 0);
+//							boardInfo.numberPlayer = MessageIO.readByte(message);
+//							boardInfo.isLock = (MessageIO.readByte(message) == 1);
+//							boardInfo.betGold = MessageIO.readLong(message);
+//							if (roomType == RoomInfo.CLAN) {
+//								readClanNames(boardInfo, message);
+//							}
+//							break;
+//						}
+//					}
+//				}
+				
+				
+				if (SelectRoom.instance.m_listBoardInfo != null && SelectRoom.instance.m_listBoardInfo.size() > 0) {
+					for (j = 0; j < SelectRoom.instance.m_listBoardInfo.size(); j++) {
+						if (SelectRoom.instance.m_listBoardInfo.get(j).itemId == tableId) {
+							SelectRoom.instance.m_listBoardInfo.get(j).isPlaying = (MessageIO.readByte(message) == 0);
+							SelectRoom.instance.m_listBoardInfo.get(j).numberPlayer = MessageIO.readByte(message);
+							SelectRoom.instance.m_listBoardInfo.get(j).isLock = (MessageIO.readByte(message) == 1);
+							SelectRoom.instance.m_listBoardInfo.get(j).betGold = MessageIO.readLong(message);
 							if (roomType == RoomInfo.CLAN) {
-								readClanNames(boardInfo, message);
+								readClanNames(SelectRoom.instance.m_listBoardInfo.get(j), message);
 							}
 							break;
 						}
 					}
+					
+//					SelectTable.instance.update_BanChoi();
+					
+					SelectTable.instance.update();
+					
 				}
+				
+				
 				boardInfo = null;
 			}
 
@@ -2301,13 +2362,24 @@ public class GlobalMsgHandler implements IMessageHandler {
 		// }
 		// });
 
-		HDCGameMidlet.instance.showDialog_Okie_withCommand("Thông báo", GameResource.disconnect,
-				new IAction() {
+//		HDCGameMidlet.instance.showDialog_Okie_withCommand("Thông báo", GameResource.disconnect,
+//				new IAction() {
+//					public void perform() {
+//						GameCanvas.loginScr.switchToMe();
+//						GameCanvas.endDlg();
+//					}
+//				});
+		
+		CustomDialog.instance.showDialog_Okie_withCommand("Thông báo", GameResource.disconnect, new IAction() {
 					public void perform() {
-						GameCanvas.loginScr.switchToMe();
-						GameCanvas.endDlg();
+//						GameCanvas.loginScr.switchToMe();
+//						GameCanvas.endDlg();
+						CustomDialog.instance.endDialog();
+						Intent intent = new Intent(CustomDialog.instance.c, Login.class);
+						CustomDialog.instance.c.startActivity(intent);
 					}
 				});
+		
 	}
 
 	private void displayInfo(Message message) {
